@@ -40,8 +40,11 @@ import retrofit2.http.Query;
 public interface Api {
 
 //    @POST("users/register")
-    @POST("register")
-    Call<RegisterApiResponse> createUser(@Body User user);
+//    @POST("register")
+//    Call<RegisterApiResponse> createUser(@Body User user);
+
+    @GET("register")
+    Call<RegisterApiResponse> createUser(@Query("name") String name,@Query("email") String email, @Query("password") String password);
 
     @GET("users/login")
     Call<LoginApiResponse> logInUser(@Query("email") String email, @Query("password") String password);

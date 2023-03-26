@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         AlertDialog alert = createAlertDialog(this);
         Log.e("TAG", "signUpUser: tiga" );
-        registerViewModel.getRegisterResponseLiveData(new User(name, email, password)).observe(this, registerApiResponse -> {
+        registerViewModel.getRegisterResponseLiveData(name, email, password).observe(this, registerApiResponse -> {
             if (!registerApiResponse.isError()) {
                 Log.e("TAG", "signUpUser: satu" );
                 Toast.makeText(this, registerApiResponse.getMessage(), Toast.LENGTH_LONG).show();

@@ -16,11 +16,11 @@ public class RegisterRepository {
 
     private static final String TAG = RegisterRepository.class.getSimpleName();
 
-    public LiveData<RegisterApiResponse> getRegisterResponseData(User user) {
+    public LiveData<RegisterApiResponse> getRegisterResponseData(String name, String email, String password) {
         Log.e(TAG, "getRegisterResponseData: 123" );
         final MutableLiveData<RegisterApiResponse> mutableLiveData = new MutableLiveData<>();
 
-        RetrofitClient.getInstance().getApi().createUser(user).enqueue(new Callback<RegisterApiResponse>() {
+        RetrofitClient.getInstance().getApi().createUser(name,email,password).enqueue(new Callback<RegisterApiResponse>() {
             @Override
             public void onResponse(retrofit2.Call<RegisterApiResponse> call, Response<RegisterApiResponse> response) {
                 Log.d(TAG, "onResponse: Succeeded");
