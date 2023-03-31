@@ -128,6 +128,10 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         mNetworkReceiver.setOnNetworkListener(this);
     }
 
+    public void tescall(){
+        Log.e(TAG, "tescall: okeee" );
+    }
+
     private void setUpViews() {
         Toolbar toolbar = binding.included.toolbar;
         setSupportActionBar(toolbar);

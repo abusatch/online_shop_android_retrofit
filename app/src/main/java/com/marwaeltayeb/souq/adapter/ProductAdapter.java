@@ -27,8 +27,10 @@ import com.marwaeltayeb.souq.model.Cart;
 import com.marwaeltayeb.souq.model.Favorite;
 import com.marwaeltayeb.souq.model.History;
 import com.marwaeltayeb.souq.model.Product;
+import com.marwaeltayeb.souq.net.RetrofitClient;
 import com.marwaeltayeb.souq.storage.LoginUtils;
 import com.marwaeltayeb.souq.utils.RequestCallback;
+import com.marwaeltayeb.souq.view.ProductActivity;
 import com.marwaeltayeb.souq.viewmodel.AddFavoriteViewModel;
 import com.marwaeltayeb.souq.viewmodel.FromCartViewModel;
 import com.marwaeltayeb.souq.viewmodel.RemoveFavoriteViewModel;
@@ -37,7 +39,17 @@ import com.marwaeltayeb.souq.viewmodel.ToHistoryViewModel;
 
 import java.text.DecimalFormat;
 
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+
+
 public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.ProductViewHolder> {
+
+    public interface OnItemClickListener {
+        void onItemClick(Cart item, View v);
+    }
+
+
 
     private final Context mContext;
     private Product product;
@@ -104,6 +116,7 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
 
             // If product is added to cart
             if (product.isInCart() == 1) {
+                Log.e("tag", "onBindViewHolder: klikcart" );
                 holder.binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
             }
 
@@ -172,6 +185,7 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
                     break;
                 case R.id.imgCart:
                     toggleProductsInCart();
+
                     break;
                 default: // Should not get here
             }
@@ -197,13 +211,15 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
         }
 
         private void toggleProductsInCart() {
-            // If Product is not added to cart
+            Log.e("tag", "toggleProductsInCart: " );
             if (product.isInCart() != 1) {
                 binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
-                insertToCart(() -> {
-                    product.setIsInCart(true);
-                    notifyDataSetChanged();
-                });
+//                insertToCart(() -> {
+//                    product.setIsInCart(true);
+//                    notifyDataSetChanged();
+//                });
+                insertToCart();
+//                insertToCart(Callback);
                 showSnackBar("Added To Cart");
             } else {
                 binding.imgCart.setImageResource(R.drawable.ic_add_shopping_cart);
@@ -228,9 +244,12 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
             removeFavoriteViewModel.removeFavorite(LoginUtils.getInstance(mContext).getUserInfo().getId(), product.getProductId(),callback);
         }
 
-        private void insertToCart(RequestCallback callback) {
+        private void insertToCart() {
+
+            Log.e("TAG", "insertToCart: callback" );
+
             Cart cart = new Cart(LoginUtils.getInstance(mContext).getUserInfo().getId(), product.getProductId());
-            toCartViewModel.addToCart(cart, callback);
+            toCartViewModel.addToCart(LoginUtils.getInstance(mContext).getUserInfo().getId(),product.getProductId());
         }
 
         private void deleteFromCart(RequestCallback callback) {

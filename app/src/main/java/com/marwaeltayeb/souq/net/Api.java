@@ -2,6 +2,7 @@ package com.marwaeltayeb.souq.net;
 
 import com.marwaeltayeb.souq.model.Cart;
 import com.marwaeltayeb.souq.model.CartApiResponse;
+import com.marwaeltayeb.souq.model.CartApiResponse2;
 import com.marwaeltayeb.souq.model.Favorite;
 import com.marwaeltayeb.souq.model.FavoriteApiResponse;
 import com.marwaeltayeb.souq.model.History;
@@ -18,6 +19,7 @@ import com.marwaeltayeb.souq.model.Review;
 import com.marwaeltayeb.souq.model.ReviewApiResponse;
 import com.marwaeltayeb.souq.model.Shipping;
 import com.marwaeltayeb.souq.model.User;
+import com.marwaeltayeb.souq.repository.ToCartRepository;
 
 import java.util.Map;
 
@@ -75,7 +77,7 @@ public interface Api {
     @GET("search_products")
     Call<ProductApiResponse> searchForProduct(@Query("q") String keyword, @Query("userId") int userId);
 
-    @POST("favorites/add")
+    @POST("favorites_add")
     Call<ResponseBody> addFavorite(@Body Favorite favorite);
 
     @DELETE("favorites/remove")
@@ -84,8 +86,10 @@ public interface Api {
     @GET("favorites")
     Call<FavoriteApiResponse> getFavorites(@Query("userId") int userId);
 
-    @POST("carts/add")
-    Call<ResponseBody> addToCart(@Body Cart cart);
+    @GET("carts_add")
+    Call<CartApiResponse2> addToCart(@Query("userId") int userId, @Query("productId") int productId);
+//    @POST("carts_add")
+//    Call<ResponseBody> addToCart(@Body Cart cart);
 
     @DELETE("carts/remove")
     Call<ResponseBody> removeFromCart(@Query("userId") int userId, @Query("productId") int productId);

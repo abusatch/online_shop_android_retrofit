@@ -32,6 +32,9 @@ import com.marwaeltayeb.souq.viewmodel.ToHistoryViewModel;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import retrofit2.Callback;
+
+
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder>{
 
     private final Context mContext;
@@ -175,10 +178,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             // If Product is not added to cart
             if (currentProduct.isInCart() != 1) {
                 binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
-                insertToCart(() -> {
-                    currentProduct.setIsInCart(true);
-                    notifyDataSetChanged();
-                });
+//                insertToCart(() -> {
+//                    currentProduct.setIsInCart(true);
+//                    notifyDataSetChanged();
+//                });
                 showSnackBar("Added To Cart");
             } else {
                 binding.imgCart.setImageResource(R.drawable.ic_add_shopping_cart);
@@ -194,10 +197,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             // If Product is not added to cart
             if (currentProduct.isInCart() != 1) {
                 binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
-                insertToCart(() -> {
-                    currentProduct.setIsInCart(true);
-                    notifyDataSetChanged();
-                });
+//                insertToCart(() -> {
+//                    currentProduct.setIsInCart(true);
+//                    notifyDataSetChanged();
+//                });
                 showSnackBar("Added To Cart");
             }
         }
@@ -215,9 +218,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             removeFavoriteViewModel.removeFavorite(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId(),callback);
         }
 
-        private void insertToCart(RequestCallback callback) {
+        private void insertToCart(int userId, int productId) {
             Cart cart = new Cart(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId());
-            toCartViewModel.addToCart(cart, callback);
+            toCartViewModel.addToCart(userId,productId);
         }
 
         private void deleteFromCart(RequestCallback callback) {

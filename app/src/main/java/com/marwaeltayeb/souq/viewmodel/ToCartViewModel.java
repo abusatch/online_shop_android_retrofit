@@ -4,10 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.marwaeltayeb.souq.model.Cart;
+import com.marwaeltayeb.souq.model.CartApiResponse;
+import com.marwaeltayeb.souq.model.CartApiResponse2;
 import com.marwaeltayeb.souq.repository.ToCartRepository;
 import com.marwaeltayeb.souq.utils.RequestCallback;
 
+
 import okhttp3.ResponseBody;
+import retrofit2.Callback;
 
 public class ToCartViewModel extends ViewModel {
 
@@ -17,7 +21,7 @@ public class ToCartViewModel extends ViewModel {
         toCartRepository = new ToCartRepository();
     }
 
-    public LiveData<ResponseBody> addToCart(Cart cart, RequestCallback callback) {
-        return toCartRepository.addToCart(cart, callback);
+    public LiveData<CartApiResponse2> addToCart(int userId, int productId) {
+        return toCartRepository.addToCart(userId,productId);
     }
 }

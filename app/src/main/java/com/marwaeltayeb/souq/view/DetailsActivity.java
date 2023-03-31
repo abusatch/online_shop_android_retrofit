@@ -32,6 +32,8 @@ import com.marwaeltayeb.souq.viewmodel.ToCartViewModel;
 
 import java.util.List;
 
+import okhttp3.Callback;
+
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "DetailsActivity";
@@ -121,7 +123,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             allReviewIntent.putExtra(PRODUCT_ID,product.getProductId());
             startActivity(allReviewIntent);
         }else if(view.getId() == R.id.addToCart){
-            insertToCart(() -> product.setIsInCart(true));
+//            insertToCart(() -> product.setIsInCart(true));
             Intent cartIntent = new Intent(DetailsActivity.this, CartActivity.class);
             startActivity(cartIntent);
         }else if(view.getId() == R.id.buy){
@@ -131,9 +133,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void insertToCart(RequestCallback callback) {
+    private void insertToCart(int userId,int productId) {
         Cart cart = new Cart(LoginUtils.getInstance(this).getUserInfo().getId(), product.getProductId());
-        toCartViewModel.addToCart(cart, callback);
+        toCartViewModel.addToCart(userId,productId);
     }
 
     @Override
