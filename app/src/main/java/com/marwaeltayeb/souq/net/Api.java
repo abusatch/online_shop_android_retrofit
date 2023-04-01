@@ -1,9 +1,6 @@
 package com.marwaeltayeb.souq.net;
 
-import com.marwaeltayeb.souq.model.Cart;
 import com.marwaeltayeb.souq.model.CartApiResponse;
-import com.marwaeltayeb.souq.model.CartApiResponse2;
-import com.marwaeltayeb.souq.model.Favorite;
 import com.marwaeltayeb.souq.model.FavoriteApiResponse;
 import com.marwaeltayeb.souq.model.History;
 import com.marwaeltayeb.souq.model.HistoryApiResponse;
@@ -18,8 +15,6 @@ import com.marwaeltayeb.souq.model.RegisterApiResponse;
 import com.marwaeltayeb.souq.model.Review;
 import com.marwaeltayeb.souq.model.ReviewApiResponse;
 import com.marwaeltayeb.souq.model.Shipping;
-import com.marwaeltayeb.souq.model.User;
-import com.marwaeltayeb.souq.repository.ToCartRepository;
 
 import java.util.Map;
 
@@ -48,7 +43,7 @@ public interface Api {
     @GET("register")
     Call<RegisterApiResponse> createUser(@Query("name") String name,@Query("email") String email, @Query("password") String password);
 
-    @GET("users/login")
+    @GET("users_login")
     Call<LoginApiResponse> logInUser(@Query("email") String email, @Query("password") String password);
 
     @DELETE("users/{userId}")
@@ -77,21 +72,23 @@ public interface Api {
     @GET("search_products")
     Call<ProductApiResponse> searchForProduct(@Query("q") String keyword, @Query("userId") int userId);
 
-    @POST("favorites_add")
-    Call<ResponseBody> addFavorite(@Body Favorite favorite);
+//    @POST("favorites_add")
+//    Call<ResponseBody> addFavorite(@Body Favorite favorite);
+    @GET("favorites_add")
+    Call<ResponseBody> addFavorite(@Query("userId") int userId, @Query("productId") int productId);
 
-    @DELETE("favorites/remove")
+    @DELETE("favorites_remove")
     Call<ResponseBody> removeFavorite(@Query("userId") int userId, @Query("productId") int productId);
 
     @GET("favorites")
     Call<FavoriteApiResponse> getFavorites(@Query("userId") int userId);
 
     @GET("carts_add")
-    Call<CartApiResponse2> addToCart(@Query("userId") int userId, @Query("productId") int productId);
+    Call<ResponseBody> addToCart(@Query("userId") int userId, @Query("productId") int productId);
 //    @POST("carts_add")
 //    Call<ResponseBody> addToCart(@Body Cart cart);
 
-    @DELETE("carts/remove")
+    @DELETE("carts_remove")
     Call<ResponseBody> removeFromCart(@Query("userId") int userId, @Query("productId") int productId);
 
     @GET("carts")
@@ -121,12 +118,23 @@ public interface Api {
     @GET("posters")
     Call<NewsFeedResponse> getPosters();
 
-    @GET("orders/get")
+    @GET("orders_get")
     Call<OrderApiResponse> getOrders(@Query("userId") int userId);
 
-    @POST("address/add")
-    Call<ResponseBody> addShippingAddress(@Body Shipping shipping);
+    @GET("address_add")
+    Call<ResponseBody> addShippingAddress(@Query("address") String address,
+                                          @Query("city") String city,
+                                          @Query("country") String country,
+                                          @Query("zip") String zip,
+                                          @Query("phone") String phone,
+                                          @Query("userId") int userId,
+                                          @Query("productId") int productId);
 
-    @POST("orders/add")
-    Call<ResponseBody> orderProduct(@Body Ordering ordering);
+    @GET("orders_add")
+    Call<ResponseBody> orderProduct(
+                                    @Query("nameOnCard") String nameOnCard,
+                                    @Query("cardNumber") String cardNumber,
+                                    @Query("fullDate") String fullDate,
+                                    @Query("userId") int userId,
+                                    @Query("productId") int productId);
 }

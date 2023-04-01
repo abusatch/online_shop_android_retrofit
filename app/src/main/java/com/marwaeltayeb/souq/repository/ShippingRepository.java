@@ -17,10 +17,10 @@ public class ShippingRepository {
 
     private static final String TAG = ShippingRepository.class.getSimpleName();
 
-    public LiveData<ResponseBody> addShippingAddress(Shipping shipping) {
+    public LiveData<ResponseBody> addShippingAddress(String address, String city, String country, String zip, String phone, int userId, int productId) {
         final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
 
-        RetrofitClient.getInstance().getApi().addShippingAddress(shipping).enqueue(new Callback<ResponseBody>() {
+        RetrofitClient.getInstance().getApi().addShippingAddress(address, city, country, zip,  phone, userId, productId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d(TAG, "onResponse: " + response.body());

@@ -27,6 +27,7 @@ public class CartRepository {
                 CartApiResponse cartApiResponse = response.body();
 
                 if (response.body() != null) {
+                    Log.e(TAG, "onResponse:sip "+cartApiResponse );
                     mutableLiveData.setValue(cartApiResponse);
                     Log.d(TAG, String.valueOf(response.body().getProductsInCart()));
                 }

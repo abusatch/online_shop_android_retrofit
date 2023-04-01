@@ -17,10 +17,10 @@ public class OrderingRepository {
 
     private static final String TAG = OrderingRepository.class.getSimpleName();
 
-    public LiveData<ResponseBody> orderProduct(Ordering ordering) {
+    public LiveData<ResponseBody> orderProduct(String nameOnCard, String cardNumber, String fullDate, int userId, int productId) {
         final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
 
-        RetrofitClient.getInstance().getApi().orderProduct(ordering).enqueue(new Callback<ResponseBody>() {
+        RetrofitClient.getInstance().getApi().orderProduct(nameOnCard,cardNumber,fullDate,userId,productId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d(TAG, "onResponse: " + response.body());

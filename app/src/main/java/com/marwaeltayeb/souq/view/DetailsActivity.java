@@ -102,7 +102,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 binding.listOfReviews.setAdapter(reviewAdapter);
             }
 
-            if(reviewList.size() == 0){
+            if(reviewList == null){
                 binding.listOfReviews.setVisibility(View.GONE);
                 binding.txtFirst.setVisibility(View.VISIBLE);
             }else {
@@ -123,7 +123,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             allReviewIntent.putExtra(PRODUCT_ID,product.getProductId());
             startActivity(allReviewIntent);
         }else if(view.getId() == R.id.addToCart){
-//            insertToCart(() -> product.setIsInCart(true));
+            insertToCart(() -> product.setIsInCart(true));
             Intent cartIntent = new Intent(DetailsActivity.this, CartActivity.class);
             startActivity(cartIntent);
         }else if(view.getId() == R.id.buy){
@@ -133,9 +133,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void insertToCart(int userId,int productId) {
+    private void insertToCart(RequestCallback callback) {
         Cart cart = new Cart(LoginUtils.getInstance(this).getUserInfo().getId(), product.getProductId());
-        toCartViewModel.addToCart(userId,productId);
+        toCartViewModel.addToCart(LoginUtils.getInstance(this).getUserInfo().getId(), product.getProductId(),callback);
     }
 
     @Override

@@ -28,8 +28,6 @@ import com.marwaeltayeb.souq.viewmodel.ToCartViewModel;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import retrofit2.Callback;
-
 public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishListViewHolder> {
 
     private final Context mContext;
@@ -146,10 +144,10 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
             // If Product is not added to cart
             if (currentProduct.isInCart()!=1) {
                 binding.imgCart.setImageResource(R.drawable.ic_shopping_cart_green);
-//                insertToCart(() -> {
-//                    currentProduct.setIsInCart(true);
-//                    notifyDataSetChanged();
-//                });
+                insertToCart(() -> {
+                    currentProduct.setIsInCart(true);
+                    notifyDataSetChanged();
+                });
                 showSnackBar("Added To Cart");
             } else {
                 binding.imgCart.setImageResource(R.drawable.ic_add_shopping_cart);
@@ -169,9 +167,9 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
             removeFavoriteViewModel.removeFavorite(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId(), callback);
         }
 
-        private void insertToCart(int userId, int productId) {
+        private void insertToCart(RequestCallback callback) {
             Cart cart = new Cart(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId());
-            toCartViewModel.addToCart(userId,productId);
+            toCartViewModel.addToCart(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId(), callback);
         }
 
         private void deleteFromCart(RequestCallback callback) {

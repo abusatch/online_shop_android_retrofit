@@ -17,7 +17,7 @@ public class AddFavoriteViewModel extends ViewModel {
         addFavoriteRepository = new AddFavoriteRepository();
     }
 
-    public LiveData<ResponseBody> addFavorite(Favorite favorite, RequestCallback callback) {
-        return addFavoriteRepository.addFavorite(favorite,callback);
+    public LiveData<ResponseBody> addFavorite(int userId,int productId, RequestCallback callback) {
+        return addFavoriteRepository.addFavorite(userId,productId,callback);
     }
 }

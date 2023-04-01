@@ -4,6 +4,7 @@ import static com.marwaeltayeb.souq.utils.Constant.PRODUCTID;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.marwaeltayeb.souq.storage.LoginUtils;
 import com.marwaeltayeb.souq.viewmodel.ShippingViewModel;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ShippingAddressActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -56,15 +58,23 @@ public class ShippingAddressActivity extends AppCompatActivity implements View.O
 
         Shipping shipping = new Shipping(address, city, country, zip, phone,userId, productId);
 
-        shippingViewModel.addShippingAddress(shipping).observe(this, responseBody -> {
+        shippingViewModel.addShippingAddress(address, city, country, zip, phone,userId, productId).observe(this, responseBody -> {
             try {
-                Toast.makeText(ShippingAddressActivity.this, responseBody.string()+"", Toast.LENGTH_SHORT).show();
+
+                if(Objects.equals(responseBody.string()+"", "berhasil")){
+                    Intent orderProductIntent = new Intent(ShippingAddressActivity.this, OrderProductActivity.class);
+                    orderProductIntent.putExtra(PRODUCTID,productId);
+                    startActivity(orderProductIntent);
+                }else{
+                    Log.e("TAG", "addShippingAddress: -"+responseBody.string()+"-" );
+                }
+                Toast.makeText(ShippingAddressActivity.this, ""+responseBody.string()+"", Toast.LENGTH_SHORT).show();
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Intent orderProductIntent = new Intent(ShippingAddressActivity.this, OrderProductActivity.class);
-            orderProductIntent.putExtra(PRODUCTID,productId);
-            startActivity(orderProductIntent);
+
         });
     }
 }

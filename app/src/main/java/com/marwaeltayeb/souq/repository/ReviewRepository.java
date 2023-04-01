@@ -25,7 +25,7 @@ public class ReviewRepository {
 
                 ReviewApiResponse responseBody = response.body();
 
-                if (response.body() != null) {
+                if (!response.body().equals("")) {
                     mutableLiveData.setValue(responseBody);
                 }
             }

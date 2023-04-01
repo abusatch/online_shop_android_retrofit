@@ -165,7 +165,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         private void insertFavoriteProduct(RequestCallback callback) {
             Favorite favorite = new Favorite(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId());
-            addFavoriteViewModel.addFavorite(favorite, callback);
+            addFavoriteViewModel.addFavorite(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId(), callback);
         }
 
         private void deleteFavoriteProduct(RequestCallback callback) {

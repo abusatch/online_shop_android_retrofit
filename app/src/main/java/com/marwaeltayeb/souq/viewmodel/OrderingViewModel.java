@@ -16,7 +16,7 @@ public class OrderingViewModel extends ViewModel {
         orderingRepository = new OrderingRepository();
     }
 
-    public LiveData<ResponseBody> orderProduct(Ordering ordering) {
-        return orderingRepository.orderProduct(ordering);
+    public LiveData<ResponseBody> orderProduct(String nameOnCard, String cardNumber, String fullDate, int userId, int productId) {
+        return orderingRepository.orderProduct(nameOnCard,cardNumber,fullDate,userId,productId);
     }
 }

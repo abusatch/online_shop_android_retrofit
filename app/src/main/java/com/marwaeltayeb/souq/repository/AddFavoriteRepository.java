@@ -18,9 +18,9 @@ public class AddFavoriteRepository {
 
     private static final String TAG = AddFavoriteRepository.class.getSimpleName();
 
-    public LiveData<ResponseBody> addFavorite(Favorite favorite, RequestCallback callback) {
+    public LiveData<ResponseBody> addFavorite(int userId,int productId, RequestCallback callback) {
         final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
-        RetrofitClient.getInstance().getApi().addFavorite(favorite).enqueue(new Callback<ResponseBody>() {
+        RetrofitClient.getInstance().getApi().addFavorite(userId,productId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d(TAG, "onResponse" + response.code());

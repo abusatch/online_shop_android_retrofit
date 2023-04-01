@@ -19,6 +19,7 @@ import com.marwaeltayeb.souq.storage.LoginUtils;
 import com.marwaeltayeb.souq.viewmodel.OrderingViewModel;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class OrderProductActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -51,12 +52,15 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
 
         Ordering ordering = new Ordering(nameOnCard,cardNumber,fullDate,userId,productId);
 
-        orderingViewModel.orderProduct(ordering).observe(this, responseBody -> {
+        orderingViewModel.orderProduct(nameOnCard,cardNumber,fullDate,userId,productId).observe(this, responseBody -> {
             try {
+
+                if(Objects.equals(responseBody.string(), "berhasil")) {
+                    finish();
+                    Intent homeIntent = new Intent(OrderProductActivity.this, ProductActivity.class);
+                    startActivity(homeIntent);
+                }
                 Toast.makeText(OrderProductActivity.this, responseBody.string() + "", Toast.LENGTH_SHORT).show();
-                finish();
-                Intent homeIntent = new Intent(OrderProductActivity.this, ProductActivity.class);
-                startActivity(homeIntent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
