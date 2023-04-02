@@ -17,9 +17,9 @@ public class ToHistoryRepository {
 
     private static final String TAG = ToHistoryRepository.class.getSimpleName();
 
-    public LiveData<ResponseBody> addToHistory(History history) {
+    public LiveData<ResponseBody> addToHistory(int userId, int productId) {
         final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
-        RetrofitClient.getInstance().getApi().addToHistory(history).enqueue(new Callback<ResponseBody>() {
+        RetrofitClient.getInstance().getApi().addToHistory(userId,productId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d(TAG, "onResponse" + response.code());

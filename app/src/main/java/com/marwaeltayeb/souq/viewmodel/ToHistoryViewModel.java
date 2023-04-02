@@ -16,7 +16,7 @@ public class ToHistoryViewModel extends ViewModel {
         toHistoryRepository = new ToHistoryRepository();
     }
 
-    public LiveData<ResponseBody> addToHistory(History history) {
-        return toHistoryRepository.addToHistory(history);
+    public LiveData<ResponseBody> addToHistory(int userId,int productId) {
+        return toHistoryRepository.addToHistory(userId,productId);
     }
 }

@@ -226,7 +226,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
         private void insertProductToHistory() {
             History history = new History(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId());
-            toHistoryViewModel.addToHistory(history);
+            toHistoryViewModel.addToHistory(LoginUtils.getInstance(mContext).getUserInfo().getId(), currentProduct.getProductId());
         }
     }
 }

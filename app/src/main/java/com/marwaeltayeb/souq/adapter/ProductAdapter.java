@@ -89,6 +89,7 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
 
             // Load the Product image into ImageView
             String imageUrl = LOCALHOST + product.getProductImage().replaceAll("\\\\", "/");
+           // Log.e("tgg", "onBindViewHolder: "+imageUrl );
             Glide.with(mContext)
                     .load(imageUrl)
                     .into(holder.binding.imgProductImage);
@@ -239,7 +240,7 @@ public class ProductAdapter extends PagedListAdapter<Product, ProductAdapter.Pro
 
         private void insertProductToHistory() {
             History history = new History(LoginUtils.getInstance(mContext).getUserInfo().getId(), product.getProductId());
-            toHistoryViewModel.addToHistory(history);
+            toHistoryViewModel.addToHistory(LoginUtils.getInstance(mContext).getUserInfo().getId(), product.getProductId());
         }
     }
 

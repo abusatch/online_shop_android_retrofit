@@ -10,6 +10,7 @@ import com.marwaeltayeb.souq.net.RetrofitClient;
 import com.marwaeltayeb.souq.storage.LoginUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -40,15 +41,19 @@ public class UploadPhotoRepository {
         RequestBody id = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(LoginUtils.getInstance(application).getUserInfo().getId()));
 
         String token = String.valueOf(LoginUtils.getInstance(application).getUserToken());
-        Log.d(TAG, "token: " + token);
+        Log.e(TAG, "token: " + token);
 
         RetrofitClient.getInstance().getApi().uploadPhoto(token,photo, id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d(TAG, "onResponse: " + "Image Updated");
+
 
                 ResponseBody responseBody = response.body();
-
+                try {
+                    Log.e(TAG, "onResponse: " + "Image Updated"+responseBody.string()+"");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if (response.body() != null) {
                     mutableLiveData.setValue(responseBody);
                 }

@@ -13,6 +13,7 @@ import static com.marwaeltayeb.souq.utils.InternetUtils.isNetworkConnected;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -38,6 +39,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -98,6 +100,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product);
 
         int userID = LoginUtils.getInstance(this).getUserInfo().getId();
+        boolean isAdmin = LoginUtils.getInstance(this).getUserInfo().isAdmin();
 
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productViewModel.loadMobiles("mobile", userID);
@@ -126,6 +129,29 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         mNetworkReceiver = new NetworkChangeReceiver();
         mNetworkReceiver.setOnNetworkListener(this);
+
+
+        String[] PERMISSIONS = {android.Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (!hasPermissions(getApplicationContext(), PERMISSIONS)) {
+            Log.e(TAG, "onCreate: tidak" );
+            ActivityCompat.requestPermissions((Activity) getApplicationContext(), PERMISSIONS, 112 );
+        } else {
+            Log.e(TAG, "onCreate: iya" );
+            //do here
+        }
+
+        Log.e(TAG, "onCreate: isAdmin"+isAdmin );
+    }
+
+    private static boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public void tescall(){
@@ -334,7 +360,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                     circleImageView.setImageURI(imageUri);
 
                     String filePath = getRealPathFromURI(this, imageUri);
-                    Log.d(TAG, "getImageFromGallery: " + filePath);
+                    Log.e(TAG, "getImageFromGallery: " + filePath);
 
                     uploadPhoto(filePath);
                 }

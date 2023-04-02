@@ -49,8 +49,9 @@ public interface Api {
     @DELETE("users/{userId}")
     Call<ResponseBody> deleteAccount(@Header("authorization") String token , @Path("userId") int userId);
 
-    @Multipart
-    @PUT("users/upload")
+//    @Multipart
+//    @PUT("users_upload")
+    @GET("users_upload")
     Call<ResponseBody> uploadPhoto(@Header("authorization") String token , @Part MultipartBody.Part userPhoto, @Part("id") RequestBody userId);
 
     @PUT("users/info")
@@ -94,8 +95,8 @@ public interface Api {
     @GET("carts")
     Call<CartApiResponse> getProductsInCart(@Query("userId") int userId);
 
-    @POST("history/add")
-    Call<ResponseBody> addToHistory(@Body History history);
+    @GET("history_add")
+    Call<ResponseBody> addToHistory(@Query("userId") int userId, @Query("productId") int productId);
 
     @DELETE("history/remove")
     Call<ResponseBody> removeAllFromHistory();
