@@ -31,14 +31,15 @@ public class HistoryDataSource extends PageKeyedDataSource<Integer, Product> {
                     @Override
                     public void onResponse(Call<HistoryApiResponse> call, Response<HistoryApiResponse> response) {
 
-
+                        if(response.body() != null) {
                         if (response.body().getHistoryList()== null) {
                             return;
                         }
 
-                        if (response.body() != null) {
-                            Log.v(TAG, "Succeeded " + response.body().getHistoryList().size());
-                            callback.onResult(response.body().getHistoryList(), null, FIRST_PAGE + 1);
+                            if (response.body() != null) {
+                                //    Log.v(TAG, "Succeeded " + response.body().getHistoryList().size());
+                                callback.onResult(response.body().getHistoryList(), null, FIRST_PAGE + 1);
+                            }
                         }
                     }
 

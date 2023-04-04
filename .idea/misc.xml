@@ -12,6 +12,10 @@
         <entry key="..\:/Marwa/Projects/ABND/Souq_ShopOnline/Souq_Android/app/src/main/res/layout/activity_password.xml" value="0.265625" />
         <entry key="..\:/Marwa/Projects/ABND/Souq_ShopOnline/Souq_Android/app/src/main/res/layout/spinner_text.xml" value="0.265625" />
         <entry key="..\:/Marwa2/Android/sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/drawable/btn_terima8.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.1" />
+        <entry key="app/src/main/res/font/roboto_condensed_regular.xml" value="0.1453125" />
+        <entry key="app/src/main/res/layout/activity_account.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.11" />
         <entry key="app/src/main/res/layout/activity_order_product.xml" value="0.11510416666666666" />
@@ -19,8 +23,11 @@
         <entry key="app/src/main/res/layout/activity_product.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/activity_shipping_address.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.11510416666666666" />
+        <entry key="app/src/main/res/layout/activity_upload.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/main_content.xml" value="0.11510416666666666" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.11510416666666666" />
+        <entry key="app/src/main/res/menu/activity_product_drawer.xml" value="0.11510416666666666" />
       </map>
     </option>
   </component>

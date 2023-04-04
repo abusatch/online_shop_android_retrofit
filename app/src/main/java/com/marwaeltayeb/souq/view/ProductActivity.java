@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -92,15 +93,20 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     private CircleImageView circleImageView;
 
     private NetworkChangeReceiver mNetworkReceiver;
+    EditText userId;
+    String user_id;
 
+    int userID = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product);
-
-        int userID = LoginUtils.getInstance(this).getUserInfo().getId();
+        userId = findViewById(R.id.userIdd);
+        userID = LoginUtils.getInstance(this).getUserInfo().getId();
         boolean isAdmin = LoginUtils.getInstance(this).getUserInfo().isAdmin();
+        Log.e(TAG, "onCreate: userID"+userID );
+
 
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productViewModel.loadMobiles("mobile", userID);
@@ -141,6 +147,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         Log.e(TAG, "onCreate: isAdmin"+isAdmin );
+        user_id = String.valueOf(userID);
     }
 
     private static boolean hasPermissions(Context context, String... permissions) {
@@ -267,7 +274,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(laptopIntent);
                 break;
             case R.id.profile_image:
-                showCustomAlertDialog();
+                Intent i = new Intent(getApplicationContext(),UploadActivity.class);
+                i.putExtra("idas",user_id);
+                i.putExtra("dari","profile");
+                startActivity(i);
+               // showCustomAlertDialog();
                 break;
             case R.id.txtCash:
                 showNormalAlertDialog(getString(R.string.cash));

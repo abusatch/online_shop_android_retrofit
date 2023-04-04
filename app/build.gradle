@@ -61,6 +61,7 @@ dependencies {
     def CircleImgVersion = "3.1.0"
     def preferenceVersion = "1.1.1"
 
+    implementation 'com.android.volley:volley:1.2.1'
 
     implementation "androidx.appcompat:appcompat:$support_version"
     // Design Support

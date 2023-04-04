@@ -47,7 +47,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         String formattedPrice = formatter.format(currentOrder.getProductPrice());
-        holder.binding.productPrice.setText(formattedPrice + " EGP");
+        holder.binding.productPrice.setText(formattedPrice + " K IDR");
 
         holder.binding.orderNumber.setText(currentOrder.getOrderNumber());
         holder.binding.orderDate.setText(currentOrder.getOrderDate());
