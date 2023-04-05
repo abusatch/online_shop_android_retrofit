@@ -61,8 +61,8 @@
 
                 <ImageView
                     android:id="@+id/imgShare"
-                    android:layout_width="@dimen/dimen30dp"
-                    android:layout_height="@dimen/dimen30dp"
+                    android:layout_width="@dimen/dimen20dp"
+                    android:layout_height="@dimen/dimen20dp"
                     android:layout_marginEnd="@dimen/dimen20dp"
                     android:background="@drawable/touch_feedback"
                     android:contentDescription="@string/share_product"
@@ -70,16 +70,16 @@
 
                 <ImageView
                     android:id="@+id/imgCart"
-                    android:layout_width="@dimen/dimen30dp"
-                    android:layout_height="@dimen/dimen30dp"
+                    android:layout_width="@dimen/dimen20dp"
+                    android:layout_height="@dimen/dimen20dp"
                     android:layout_marginEnd="@dimen/dimen20dp"
                     android:contentDescription="@string/add_to_cart"
                     android:src="@drawable/ic_add_shopping_cart" />
 
                 <ImageView
                     android:id="@+id/imgFavourite"
-                    android:layout_width="@dimen/dimen30dp"
-                    android:layout_height="@dimen/dimen30dp"
+                    android:layout_width="@dimen/dimen20dp"
+                    android:layout_height="@dimen/dimen20dp"
                     android:contentDescription="@string/add_to_favourite"
                     android:src="@drawable/ic_favorite_border" />
             </LinearLayout>

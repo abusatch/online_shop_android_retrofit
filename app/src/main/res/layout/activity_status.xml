@@ -185,7 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginLeft="@dimen/dimen10dp"
-            android:layout_marginTop="@dimen/dimen30dp"
+            android:layout_marginTop="@dimen/dimen20dp"
             android:layout_marginRight="@dimen/dimen10dp"
             android:layout_marginBottom="@dimen/dimen10dp"
             android:background="@color/green"

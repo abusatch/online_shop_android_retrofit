@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/imgFavourite"
-                android:layout_width="@dimen/dimen30dp"
-                android:layout_height="@dimen/dimen30dp"
+                android:layout_width="@dimen/dimen20dp"
+                android:layout_height="@dimen/dimen20dp"
                 android:layout_marginEnd="@dimen/dimen5dp"
                 android:layout_gravity="end"
                 android:contentDescription="@string/add_to_favourite"
@@ -103,8 +103,8 @@
 
                 <ImageView
                     android:id="@+id/imgCart"
-                    android:layout_width="@dimen/dimen30dp"
-                    android:layout_height="@dimen/dimen30dp"
+                    android:layout_width="@dimen/dimen20dp"
+                    android:layout_height="@dimen/dimen20dp"
                     android:layout_marginStart="@dimen/dimen20dp"
                     android:layout_marginEnd="@dimen/dimen5dp"
                     android:contentDescription="@string/add_to_cart"
