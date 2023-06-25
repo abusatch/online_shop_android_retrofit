@@ -17,23 +17,23 @@ public class ShippingRepository {
 
     private static final String TAG = ShippingRepository.class.getSimpleName();
 
-    public LiveData<ResponseBody> addShippingAddress(String address, String city, String country, String zip, String phone, int userId, int productId) {
-        final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
+    public LiveData<Shipping> addShippingAddress3(String address, String city, String country, String zip, String phone, int userId, int productId) {
+        final MutableLiveData<Shipping> mutableLiveData = new MutableLiveData<>();
 
-        RetrofitClient.getInstance().getApi().addShippingAddress(address, city, country, zip,  phone, userId, productId).enqueue(new Callback<ResponseBody>() {
+        RetrofitClient.getInstance().getApi().addShippingAddress(address, city, country, zip,  phone, userId, productId).enqueue(new Callback<Shipping>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d(TAG, "onResponse: " + response.body());
+            public void onResponse(Call<Shipping> call, Response<Shipping> response) {
+                Log.e(TAG, "onResponseee: " + response.body());
 
-                ResponseBody responseBody = response.body();
+                Shipping shipping2 = response.body();
 
                 if (response.body() != null) {
-                    mutableLiveData.setValue(responseBody);
+                    mutableLiveData.setValue(shipping2);
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Shipping> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });

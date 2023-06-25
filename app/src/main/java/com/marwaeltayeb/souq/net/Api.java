@@ -41,8 +41,17 @@ public interface Api {
 //    Call<RegisterApiResponse> createUser(@Body User user);
 
     @GET("register")
-    Call<RegisterApiResponse> createUser(@Query("name") String name,@Query("email") String email, @Query("password") String password);
-
+    Call<RegisterApiResponse> createUser(@Query("name") String name,
+                                         @Query("email") String email,
+                                         @Query("password") String password);
+    @GET("address_add")
+    Call<Shipping> addShippingAddress(@Query("address") String address,
+                                      @Query("city") String city,
+                                      @Query("country") String country,
+                                      @Query("zip") String zip,
+                                      @Query("phone") String phone,
+                                      @Query("userId") int userId,
+                                      @Query("productId") int productId);
     @GET("users_login")
     Call<LoginApiResponse> logInUser(@Query("email") String email, @Query("password") String password);
 
@@ -122,14 +131,13 @@ public interface Api {
     @GET("orders_get")
     Call<OrderApiResponse> getOrders(@Query("userId") int userId);
 
-    @GET("address_add")
-    Call<ResponseBody> addShippingAddress(@Query("address") String address,
-                                          @Query("city") String city,
-                                          @Query("country") String country,
-                                          @Query("zip") String zip,
-                                          @Query("phone") String phone,
-                                          @Query("userId") int userId,
-                                          @Query("productId") int productId);
+//    Call<ResponseBody> addShippingAddress(@Query("address") String address,
+//                                          @Query("city") String city,
+//                                          @Query("country") String country,
+//                                          @Query("zip") String zip,
+//                                          @Query("phone") String phone,
+//                                          @Query("userId") int userId,
+//                                          @Query("productId") int productId);
 
     @GET("orders_add")
     Call<ResponseBody> orderProduct(

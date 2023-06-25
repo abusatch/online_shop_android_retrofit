@@ -85,7 +85,6 @@ public class ProductDataSource extends PageKeyedDataSource<Integer, Product> {
                             // If the response has next page, increment the next page number
                            if(response.body().getProducts() != null) {
                                Integer key = response.body().getProducts().size() == PAGE_SIZE ? params.key + 1 : null;
-
                                // Passing the loaded database and next page value
                                callback.onResult(response.body().getProducts(), key);
                            }

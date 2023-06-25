@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class Shipping {
 
-    @SerializedName("address")
+//    @SerializedName("address")
     private String address;
-    @SerializedName("city")
+//    @SerializedName("city")
     private String city;
-    @SerializedName("country")
+//    @SerializedName("country")
     private String country;
-    @SerializedName("zip")
+//    @SerializedName("zip")
     private String zip;
-    @SerializedName("phone")
+//    @SerializedName("phone")
     private String phone;
-    @SerializedName("userId")
+//    @SerializedName("userId")
     private int userId;
-    @SerializedName("productId")
+//    @SerializedName("productId")
     private int productId;
 
     public Shipping(String address, String city, String country, String zip, String phone, int userId, int productId) {

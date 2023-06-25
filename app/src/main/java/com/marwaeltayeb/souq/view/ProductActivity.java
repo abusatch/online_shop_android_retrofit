@@ -221,7 +221,6 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     private void getLaptops() {
         if (isNetworkConnected(this)) {
             productViewModel.laptopPagedList.observe(this, products -> laptopAdapter.submitList(products));
-
             binding.included.content.listOfLaptops.setAdapter(laptopAdapter);
         } else {
             showOrHideViews(View.INVISIBLE);

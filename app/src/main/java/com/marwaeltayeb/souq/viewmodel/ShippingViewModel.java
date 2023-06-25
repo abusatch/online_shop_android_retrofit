@@ -16,7 +16,7 @@ public class ShippingViewModel  extends ViewModel {
         shippingRepository = new ShippingRepository();
     }
 
-    public LiveData<ResponseBody> addShippingAddress(String address, String city, String country, String zip, String phone, int userId, int productId) {
-        return shippingRepository.addShippingAddress(address, city, country, zip, phone,userId, productId);
+    public LiveData<Shipping> addShippingAddress2(String address, String city, String country, String zip, String phone, int userId, int productId) {
+        return shippingRepository.addShippingAddress3(address, city, country, zip, phone,userId, productId);
     }
 }

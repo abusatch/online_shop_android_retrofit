@@ -55,25 +55,29 @@ public class ShippingAddressActivity extends AppCompatActivity implements View.O
         int userId = LoginUtils.getInstance(this).getUserInfo().getId();
         Intent intent = getIntent();
         int productId = intent.getIntExtra(PRODUCTID, 0);
+        Log.e("TAG", "addShippingAddress: okesip2"+userId+"---"+productId );
 
-        Shipping shipping = new Shipping(address, city, country, zip, phone,userId, productId);
+//        Shipping shipping = new Shipping(address, city, country, zip, phone,userId, productId);
 
-        shippingViewModel.addShippingAddress(address, city, country, zip, phone,userId, productId).observe(this, responseBody -> {
-            try {
-
-                if(Objects.equals(responseBody.string()+"", "berhasil")){
+        shippingViewModel.addShippingAddress2(address, city, country, zip, phone,userId, productId).observe(this, shipping2 -> {
+//            try {
+//                if(!shipping2.){
+//
+//                }
+                Log.e("TAG", "addShippingAddress: okesip"+userId+"---"+productId+"ss"+shipping2.toString() );
+                if(Objects.equals(shipping2+"", "berhasil")){
                     Intent orderProductIntent = new Intent(ShippingAddressActivity.this, OrderProductActivity.class);
                     orderProductIntent.putExtra(PRODUCTID,productId);
                     startActivity(orderProductIntent);
                 }else{
-                    Log.e("TAG", "addShippingAddress: -"+responseBody.string()+"-" );
+                    Log.e("TAG", "addShippingAddress: -"+shipping2+"-" );
                 }
-                Toast.makeText(ShippingAddressActivity.this, ""+responseBody.string()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShippingAddressActivity.this, ""+shipping2+"", Toast.LENGTH_SHORT).show();
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
         });
     }

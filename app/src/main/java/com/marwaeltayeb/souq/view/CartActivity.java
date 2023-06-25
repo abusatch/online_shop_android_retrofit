@@ -55,7 +55,8 @@ public class CartActivity extends AppCompatActivity {
             cartViewModel.getProductsInCart(LoginUtils.getInstance(this).getUserInfo().getId()).observe(this, cartApiResponse -> {
                 if (cartApiResponse != null) {
                     favoriteList = cartApiResponse.getProductsInCart();
-                    if (favoriteList.size() == 0) {
+                    if (favoriteList == null
+                    ) {
                         binding.noBookmarks.setVisibility(View.VISIBLE);
                         binding.emptyCart.setVisibility(View.VISIBLE);
                     } else {
